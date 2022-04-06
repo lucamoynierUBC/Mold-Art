@@ -7,7 +7,8 @@ public abstract class Mold {
     protected int y;
 
     protected static final int SIZE = 1;
-    protected static final Color COLOR = new Color(0, 128, 0);
+    //protected static final Color COLOR =new Color(0,128, 0);
+    protected Color color;
 
 
     public int getX(){
@@ -18,10 +19,18 @@ public abstract class Mold {
         return y;
     }
 
+    public Color getColor() {
+        return color;
+    }
+
+
+
     public abstract void draw(Graphics g);
 
 
     public abstract void grow();
+
+
 
 
 
