@@ -21,16 +21,35 @@ public class FungusArena {
         fungus = new ArrayList<Mold>();
         test = new MoldHead(300, 300, null);
         test.setOrigin();
+        //fungus.add(test);
 
 
     }
 
     public void update() {
-        test.grow();
+        for (Mold fungi: fungus) {
+            fungi.grow();
+            test.growMold();
+        }
     }
 
     public void draw(Graphics g) {
-        test.draw(g);
+        for (Mold fungi: fungus) {
+            fungi.draw(g);
+        }
+    }
+
+    public void mouseClick(int mouseX, int mouseY){
+        MoldHead mold = new MoldHead(mouseX, mouseY, null);
+        mold.setOrigin();
+        fungus.add(mold);
+
+
+
+
+
+
+
     }
 
 

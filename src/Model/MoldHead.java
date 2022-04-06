@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Random;
 
 public class MoldHead extends Mold {
-    // protected color
+    //private static final Color COLOR = new Color(0,128,0);
 
     private List<Mold> children;
-    private List<Mold> allChildren;
+    protected List<Mold> allChildren;
     private MoldHead parent;
     private Boolean origin;
 
@@ -25,16 +25,25 @@ public class MoldHead extends Mold {
         } else {
             allChildren = new ArrayList<>();
         }
+        setColor();
+
+
+
+
 
 
 
 
 
     }
+
+
 
     public List<Mold> getChildren() {
         return children;
     }
+
+    public List<Mold> getAllChildren() { return allChildren;}
 
 
     public void setOrigin() {
@@ -52,7 +61,7 @@ public class MoldHead extends Mold {
 
     public void addChildEast() {
         Mold child = new MoldChild(this.getLastMold().getX() + 1, this.getLastMold().getY(), this);
-        if (!allChildren.contains(child) && children.contains(child)) {
+        if (!allChildren.contains(child) && !children.contains(child)) {
             children.add(child);
             allChildren.add(child);
         }
@@ -124,11 +133,25 @@ public class MoldHead extends Mold {
         return result;
 
     }
+    public void setColor() {
+        // finish grab index fromlist of children
+
+        int size = allChildren.size();
+
+        int r = size % 255;
+        int g = size % 255;
+        int b = size % 255;
+
+        color = new Color(r,g,b);
+
+
+
+    }
 
     @Override
     public void draw(Graphics g) {
         Color savedCol = g.getColor();
-        g.setColor(COLOR);
+        g.setColor(color);
         g.fillRect(getX() - SIZE / 2, getY() - SIZE / 2, SIZE, SIZE);
         for (Mold child : children) {
             child.draw(g);
@@ -149,23 +172,31 @@ public class MoldHead extends Mold {
     public void growMold() {
         int growDirection = generateNum();
 
-        if (children.size() < 20 && allChildren.size() < 2000) {
+        if (children.size() < 100 && allChildren.size() < 5000) {
 
-            if (growDirection < 20) {
-                this.addChildEast();
-            } else if (growDirection < 40 && growDirection > 20) {
-                this.addChildWest();
-            } else if (growDirection > 40 && growDirection < 60) {
-                this.addChildNorth();
-            } else if (growDirection > 60 && growDirection < 80) {
-                this.addChildSouth();
-            } else if (growDirection > 80 && growDirection < 83) {
+            if (growDirection < 35) {
+                for (int i = 0; i < 5; i++) {
+                    this.addChildEast();
+                }
+            } else if (growDirection < 50 && growDirection > 35) {
+                for (int i = 0; i < 5; i++) {
+                    this.addChildWest();
+                }
+            } else if (growDirection > 50 && growDirection < 65) {
+                for (int i = 0; i < 5; i++) {
+                    this.addChildNorth();
+                }
+            } else if (growDirection > 65 && growDirection < 80) {
+                for (int i = 0; i < 5; i++) {
+                    this.addChildSouth();
+                }
+            } else if (growDirection == 80 ) {
                 this.addHeadEast();
-            } else if (growDirection > 83 && growDirection < 85) {
+            } else if (growDirection ==81) {
                 this.addHeadWest();
-            } else if (growDirection > 85 && growDirection < 87) {
+            } else if (growDirection == 82) {
                 this.addHeadNorth();
-            } else if (growDirection > 87) {
+            } else if (growDirection == 83) {
                 this.addHeadSouth();
             }
         }

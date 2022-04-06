@@ -3,12 +3,11 @@ package ui;
 import Model.FungusArena;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class GUI extends JFrame {
 
-    private static final int INTERVAL = 1;
+    private static final int INTERVAL = 20;
 
     private FungusArena arena;
     private ArenaPanel ap;
@@ -23,6 +22,7 @@ public class GUI extends JFrame {
         add(ap);
         pack();
         setVisible(true);
+        addMouseListener(new MouseHandler());
         addTimer();
         t1.start();
     }
@@ -36,6 +36,38 @@ public class GUI extends JFrame {
             }
         });
     }
+
+    private class MouseHandler implements MouseListener {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            int x = e.getX();
+            int y = e.getY();
+            arena.mouseClick(x, y);
+
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+    }
+
 
     public static void main(String[] args) {new GUI();}
 }
